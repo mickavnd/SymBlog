@@ -1,0 +1,11 @@
+vich_uploder:
+   db_driver: orm
+
+   metadata:
+     type: attribute 
+     
+   mappings:
+     post_thumbnail:
+      uri_prefix: /images/posts
+      upload_destionation:  "%kernel.project_dir%/public/images/posts"
+      namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
