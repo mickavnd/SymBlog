@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Post\Thumbnail;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use function PHPSTORM_META\type;
@@ -45,6 +46,8 @@ class Post
     #[Assert\NotNull()]
     private ?\DateTimeImmutable $updateAt = null;
 
+    #[ORM\OneToOne(inversedBy: 'post', targetEntity: Thumbnail::class ,cascade:['persist', 'remove'])]
+    private Thumbnail $thumbnail;
    
     public function __construct()
     {
@@ -138,6 +141,18 @@ class Post
 
         return $this;
     }
+
+    public function getThumbnail(): ?Thumbnail
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?Thumbnail $thumbnail):self
+    {
+        $this->thumbnail=$thumbnail;
+        return $this;
+    }
+
 
     public function __toString()
     {
