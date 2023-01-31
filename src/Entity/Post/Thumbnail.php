@@ -2,7 +2,7 @@
 
 namespace App\Entity\Post;
 
-use App\Entity\Post;
+use App\Entity\Post\Post;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Entity\File;
 use App\Repository\Post\ThumbnailRepository;

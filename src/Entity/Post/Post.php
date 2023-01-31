@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Post;
 
 use App\Entity\Post\Thumbnail;
 use Cocur\Slugify\Slugify;
