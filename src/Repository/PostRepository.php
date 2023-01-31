@@ -39,6 +39,22 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Get published post
+     *
+     * @return array
+     */
+    public function findPublished():array
+    {
+        return $this->createQueryBuilder("p")
+            ->where('p.state LIKE :state')
+            ->setParameter('state', '%STATE_PUBLISHED%')
+            ->orderBy('p.createdAt','DESC')
+            ->getQuery()
+            ->getResult();
+    
+    }
+
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */
