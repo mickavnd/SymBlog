@@ -5,3 +5,8 @@
 /* .first{
  /* border: red 1px solid; */
 
+/* page error */
+
+.error{  
+    border: red 1px solid;
+}
