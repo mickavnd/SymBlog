@@ -1,7 +1,7 @@
 		<div class="flex justify-center my-8 mr-4">
 				
 					<div class="rounded-lg shadow-lg bg-white max-w-sm">
-						<a href="#!">
+						<a href="{{path('post_show', {slug: posts.slug})}}}">
               {% if posts.thumbnail %}
 
                 <img src="{{ vich_uploader_asset(posts.thumbnail,'imageFile')}}" alt="{{posts.thumbnail.imageName}}">
