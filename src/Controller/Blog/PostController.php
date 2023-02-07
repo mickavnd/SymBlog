@@ -4,7 +4,6 @@ namespace App\Controller\Blog;
 
 use App\Entity\Post\Post;
 use App\Repository\PostRepository;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,12 +21,13 @@ class PostController extends AbstractController
         ]);
     }
 
-    #[Route('article/{slug}', name:'post_show', methods:['GET'])]
+    #[Route('/article/{slug}', name:'post_show', methods:['GET'])]
     public function show(Post $post):Response
     {
+        // dd($post);
         
         return $this->render('pages/post/show.html.twig',[
-            'post'=> $post
+            'posts'=> $post
         ]);
     }
 }

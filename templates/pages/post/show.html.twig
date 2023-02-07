@@ -2,29 +2,29 @@
 
 
 {% block title %}
-	{{post.title}}
+	{{posts.title}}
 {% endblock %}
 
 {% block body %}
 
 	<div class="containter mx-auto">
 
-		<h1>{{post.title|capitalize}}</h1>
+		<h1>{{posts.title|capitalize}}</h1>
 
 		<h2>publier le
-			{{ post.createdAt|date('d/m/Y')}}</h2>
+			{{ posts.createdAt|date('d/m/Y')}}</h2>
 
 
-		{% if post.thumbnail %}
+		{% if posts.thumbnail %}
 
-			<img src="{{ vich_uploader_asset(post.thumbnail,'imageFile')}}" alt="{{post.thumbnail.imageName}}">
+			<img src="{{ vich_uploader_asset(posts.thumbnail,'imageFile')}}" alt="{{posts.thumbnail.imageName}}">
 
 		{% endif %}
 
 		<div>
-			{{post.content|raw}}
+			{{posts.content|raw}}
 			<p>dernier mis a jour le
-				{{post.updateAt|date('d/m/Y')}}</p>
+				{{posts.updateAt|date('d/m/Y')}}</p>
 		</div>
 
 
