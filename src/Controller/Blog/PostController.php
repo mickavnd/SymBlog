@@ -21,6 +21,13 @@ class PostController extends AbstractController
         ]);
     }
 
+    
+    /**
+     * Undocumented function
+     *
+     * @param Post $post
+     * @return Response
+     */
     #[Route('/article/{slug}', name:'post_show', methods:['GET'])]
     public function show(Post $post):Response
     {
