@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Post\Category;
 use App\Entity\Post\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -46,14 +47,25 @@ class PostRepository extends ServiceEntityRepository
      *
      * @return array
      */
-    public function findPublished(int $page) :PaginationInterface
+    public function findPublished(int $page, ?Category $category = null) :PaginationInterface
     {
         $data =$this->createQueryBuilder("p")
+            ->select('c','p')
+            ->join('p.categories', 'c')
             ->where('p.state LIKE :state')
             ->setParameter('state', '%STATE_PUBLISHED%')
-            ->orderBy('p.createdAt','DESC')
-            ->getQuery()
-            ->getResult();
+            ->orderBy('p.createdAt','DESC');
+
+            if(isset($category))
+            {
+                $data =$data
+                        ->andWhere('c.id LIKE :category')
+                        ->setParameter('category',$category->getId());
+            }
+
+
+            $data ->getQuery()
+                 ->getResult();
 
             $post = $this->paginatorInterface->paginate($data,$page,9);
         return $post;    
