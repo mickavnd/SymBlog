@@ -21,6 +21,11 @@
 
 		{% endif %}
 
+		<div >
+		{% include "components/_bages.html.twig" with {badges: 
+		post.categories} only %}
+		</div>
+
 		<div>
 			{{posts.content|raw}}
 			<p>dernier mis a jour le

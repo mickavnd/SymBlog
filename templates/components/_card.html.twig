@@ -10,6 +10,10 @@
 
 			<img class="rounded-t-lg" src="https://mdbootstrap.com/img/new/standard/nature/184.jpg" alt=""/>
 		</a>
+		<div class="flex space-x-2 justify-center" >
+		{% include "components/_badges.html.twig" with {badges: 
+		posts.categories} only %}
+		</div>
 		<div class="p-6">
 			<h5 class="text-gray-900 text-xl font-medium mb-2">{{posts.title}}</h5>
 			<p class="text-gray-700 text-base mb-4">
