@@ -53,11 +53,16 @@ class Post
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'Post')]
     private Collection $categories;
    
+    #[ORM\ManyToMany(targetEntity: Tags::class, mappedBy: 'Post')]
+    private Collection $tags;
+
     public function __construct()
     {
         $this->updateAt = new \DateTimeImmutable();
         $this->createdAt = new \DateTimeImmutable();
         $this->categories = new ArrayCollection();
+        $this->tags = new ArrayCollection();
+        
     }
     #[ORM\PrePersist]
      public function prePersist()
@@ -187,6 +192,34 @@ class Post
     {
         if ($this->categories->removeElement($category)) {
             $category->removePost($this);
+        }
+
+        return $this;
+    }
+
+
+      /**
+     * @return Collection<int, tag>
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTags(Tags $tags): self
+    {
+        if (!$this->tags->contains($tags)) {
+            $this->tags->add($tags);
+            $tags->addPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTags(Tags $tags): self
+    {
+        if ($this->tags->removeElement($tags)) {
+            $tags->removePost($this);
         }
 
         return $this;
