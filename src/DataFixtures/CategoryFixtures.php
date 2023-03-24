@@ -37,7 +37,8 @@ class CategoryFixtures extends Fixture implements DependentFixtureInterface
 
         foreach($posts as $post)
         {
-            for ($i=0; $i < mt_rand(1,5) ; $i++) { 
+            for ($i=0; $i < mt_rand(1, 5) ; $i++) { 
+                
                 $post->addCategory($categoires[mt_rand(0,count($categoires) - 1)]);
             }
             

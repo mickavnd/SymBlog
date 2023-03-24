@@ -86,14 +86,26 @@ class PostRepository extends ServiceEntityRepository
         $data =$this->createQueryBuilder('p')
             ->where('p.state LIKE :state')
             ->setParameter('state','%STATE_PUBLISHED%')
-            ->orderBy('p.createdAt','DESC');
+            ->addOrderBy('p.createdAt','DESC');
 
        if(!empty($searchData->q)){
 
+        //search on post title
         $data =$data
+           ->join('p.tags','t')
            ->andWhere('p.title LiKE :q')
+           ->orWhere('t.name LIKE :q')
            ->setParameter('q',"%{$searchData->q}%");
        }  
+
+       if(!empty($searchData->categories)){
+        $data =$data
+           ->join('p.categories','c')
+           ->andWhere('c.id IN (:categories)')
+           ->setParameter('categories', $searchData->categories);
+       }  
+
+       
        $data = $data
             ->getQuery()
             ->getResult();
